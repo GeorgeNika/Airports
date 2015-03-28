@@ -12,4 +12,6 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="add_button">ADD NEW</string>
     <string name="title_activity_location">LocationActivity</string>
+    <string name="main_drawer_open">main_drawer_open</string>
+    <string name="main_drawer_close">main_drawer_close</string>
 </resources>
