@@ -20,6 +20,14 @@
             android:name=".activity.MainAirportsActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".activity.AirportsEditActivity"
+            android:label="@string/title_activity_airports_edit" >
+        </activity>
+        <activity
+            android:name=".activity.BrowseWebSiteActivity"
+            android:label="@string/title_activity_browse_web_site" >
+        </activity>
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import ua.george_nika.airports.R;
+import ua.george_nika.airports.database.FactoryDb;
 
 public class SplashActivity extends Activity {
 
@@ -14,6 +15,12 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                FactoryDb.getInstance().getAirportsDb().preparedDbForWork();
+            }
+        }, 0);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
