@@ -161,6 +161,10 @@ public class AirportsEditActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     // todo goto google map
+                    Intent intent = new Intent(AirportsEditActivity.this,GoogleMapActivity.class);
+                    intent.putExtra(GoogleMapActivity.EXTRA_LATITUDE,airport.getLatitude());
+                    intent.putExtra(GoogleMapActivity.EXTRA_LONGITUDE,airport.getLongitude());
+                    startActivity(intent);
                 }
             });
 
