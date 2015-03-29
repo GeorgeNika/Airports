@@ -9,13 +9,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin">
+        android:background="@drawable/main">
 
-        <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <include
+            android:id="@+id/main_toolbar"
+            layout="@layout/toolbar"/>
+
+        <TextView
+            android:id="@+id/text_hello"
+            android:text="@string/hello_world"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_toolbar"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/text_find_airport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_hello"/>
 
     </RelativeLayout>
 
@@ -30,7 +41,10 @@
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:background="#80158dd0">
+        android:background="#80158dd0" >
+        <!-- "#80158dd0" -->
+
+
         <Button
             android:id="@+id/button1"
             android:layout_width="wrap_content"
@@ -55,10 +69,6 @@
             android:layout_height="wrap_content"
             android:text="GoogleMap"/>
 
-        <AutoCompleteTextView
-            android:id="@+id/text_find_airport"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </android.support.v4.widget.DrawerLayout>

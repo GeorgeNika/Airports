@@ -110,6 +110,40 @@ public abstract class AirportsDbAbstract implements AirportsDb {
     }
 
     @Override
+    public List<Airport> getNearestAirports(Airport airport, Integer distanceForNearestAirports) {
+        String whereString = " ( "+
+            "( longitude between "+(airport.getLongitude()-3)+" and "+(airport.getLongitude()+3)+" ) AND " +
+            "( latitude  between "+(airport.getLatitude()-3)+" and "+(airport.getLatitude()+3)+" ) AND " +
+            "( _id<>"+airport.get_id()+" ) )";
+
+        List<Airport> resultAirports = new ArrayList<Airport>();
+        Cursor cursor = dbForRead.query(AIRPORTS_TABLE_NAME, null,whereString,null,null,null,null);
+
+        if (cursor != null){
+            Airport tempAirport;
+            while (cursor.moveToNext()) {
+                tempAirport = getAirportFromCursor(cursor);
+                if (isNearest(airport, tempAirport,distanceForNearestAirports)){
+                    resultAirports.add(tempAirport);
+                }
+            }
+        }
+        return resultAirports;
+    }
+    private Boolean isNearest(Airport airport, Airport tempAirport,Integer distanceForNearestAirports ){
+        //d=2*arcsin(sqrt((sin((Широта1-Широта2)/2))^2 + cos(Широта1)*cos(Широта2)*(sin((Долгота1-Долгота2)/2))^2))
+        //расстояние  = 111,11 * корень [ (дельта д * cos ш)^2 + (дельта ш) ^2]
+        Float deltaLongitude = airport.getLongitude()-tempAirport.getLongitude();
+        Float deltaLatitude = airport.getLatitude()-tempAirport.getLatitude();
+        Double distance = 111.11f * Math.sqrt (Math.pow(deltaLongitude*Math.cos(deltaLatitude),2)+Math.pow(deltaLatitude,2));
+        if (distance<=distanceForNearestAirports) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public Integer getSizeOfBase() {
         Cursor cursor = dbForRead.query(AIRPORTS_TABLE_NAME,null,null,null,null,null,null);
         return cursor.getCount();

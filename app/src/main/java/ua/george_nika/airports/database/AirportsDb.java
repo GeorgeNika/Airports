@@ -20,6 +20,8 @@ public interface AirportsDb {
 
     public List<Airport> getAllAirports();
 
+    public List<Airport> getNearestAirports(Airport airport, Integer distanceForNearestAirports);
+
     public List<Airport> getSearchedAirports(String searchedString);
 
     public Airport getAirportFromId(Integer airportId);

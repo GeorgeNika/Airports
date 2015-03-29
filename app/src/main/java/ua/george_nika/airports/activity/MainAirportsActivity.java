@@ -39,7 +39,7 @@ public class MainAirportsActivity extends ActionBarActivity {
     private void initializeVariables(){
         airportTitle = (AutoCompleteTextView) findViewById(R.id.text_find_airport);
         mainDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
-        mainToolbar = (Toolbar)findViewById(R.id.toolbar);
+        mainToolbar = (Toolbar)findViewById(R.id.main_toolbar);
     }
 
     private void setAdapters(){
@@ -55,6 +55,7 @@ public class MainAirportsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(v.getContext(), AirportsEditActivity.class));
+                mainDrawerLayout.closeDrawers();
             }
         });
 
@@ -64,6 +65,7 @@ public class MainAirportsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
               //  startActivity(new Intent(v.getContext(), MapActivity.class));
+                mainDrawerLayout.closeDrawers();
             }
         });
 
@@ -72,6 +74,7 @@ public class MainAirportsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
               //  startActivity(new Intent(v.getContext(), LocationActivity.class));
+                mainDrawerLayout.closeDrawers();
             }
         });
 
@@ -80,6 +83,7 @@ public class MainAirportsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(v.getContext(), GoogleMapActivity.class));
+                mainDrawerLayout.closeDrawers();
             }
         });
 
@@ -122,6 +126,7 @@ public class MainAirportsActivity extends ActionBarActivity {
         //Set the custom mainToolbar
         if (mainToolbar != null){
             setSupportActionBar(mainToolbar);
+            mainToolbar.setTitle(null);
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -160,10 +160,15 @@ public class AirportsEditActivity extends Activity {
             jumpToGoogleMap.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // todo goto google map
                     Intent intent = new Intent(AirportsEditActivity.this,GoogleMapActivity.class);
-                    intent.putExtra(GoogleMapActivity.EXTRA_LATITUDE,airport.getLatitude());
-                    intent.putExtra(GoogleMapActivity.EXTRA_LONGITUDE,airport.getLongitude());
+                    //todo why need set id? why id-empty?
+                    airport.set_id(_id);
+                    intent.putExtra(GoogleMapActivity.EXTRA_FIRST_AIRPORT, airport);
+                    //todo  remove second airport
+                    Airport secondAirport = new Airport();
+                    secondAirport.setLatitude(50f);
+                    secondAirport.setLongitude(30f);
+                    intent.putExtra(GoogleMapActivity.EXTRA_SECOND_AIRPORT,secondAirport);
                     startActivity(intent);
                 }
             });

@@ -1,22 +1,28 @@
 package ua.george_nika.airports.data;
 
-public class Airport {
+import android.os.Parcel;
+import android.os.Parcelable;
 
-    private Integer _id;
+public class Airport implements Parcelable{
+
+    private int _id;
     private String iata_code;
     private String icao_code;
     private String name_rus;
     private String name_eng;
     private String city_rus;
     private String city_eng;
-    private Float gmt_offset;
+    private float gmt_offset;
     private String country_rus;
     private String country_eng;
     private String iso_code;
-    private Float latitude;
-    private Float longitude;
+    private float latitude;
+    private float longitude;
     private String website ;
 
+
+    public Airport() {
+    }
 
     public Integer get_id() {
         return _id;
@@ -128,5 +134,55 @@ public class Airport {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public static final Parcelable.Creator<Airport> CREATOR = new Parcelable.Creator<Airport>() {
+
+        public Airport createFromParcel(Parcel in) {
+            return new Airport(in);
+        }
+
+        public Airport[] newArray(int size) {
+            return new Airport[size];
+        }
+    };
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(_id);
+        dest.writeString(iata_code);
+        dest.writeString(icao_code);
+        dest.writeString(name_rus);
+        dest.writeString(name_eng);
+        dest.writeString(city_rus);
+        dest.writeString(city_eng);
+        dest.writeFloat(gmt_offset);
+        dest.writeString(country_rus);
+        dest.writeString(country_eng);
+        dest.writeString(iso_code);
+        dest.writeFloat(latitude);
+        dest.writeFloat(longitude);
+        dest.writeString(website);  
+    }
+
+    public Airport(Parcel parcel) {
+        this._id  = parcel.readInt();
+        this.iata_code  = parcel.readString();
+        this.icao_code  = parcel.readString();
+        this.name_rus  = parcel.readString();
+        this.name_eng  = parcel.readString();
+        this.city_rus  = parcel.readString();
+        this.city_eng  = parcel.readString();
+        this.gmt_offset  = parcel.readFloat();
+        this.country_rus  = parcel.readString();
+        this.country_eng  = parcel.readString();
+        this.iso_code  = parcel.readString();
+        this.latitude  = parcel.readFloat();
+        this.longitude  = parcel.readFloat();
+        this.website  = parcel.readString();
     }
 }
