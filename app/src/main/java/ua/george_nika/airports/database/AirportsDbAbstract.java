@@ -14,8 +14,8 @@ public abstract class AirportsDbAbstract implements AirportsDb {
 
     protected static final String AIRPORTS_TABLE_NAME = "airports";
 
-    protected static SQLiteDatabase dbForRead;
-    protected static SQLiteDatabase dbForWrite;
+    abstract protected SQLiteDatabase getVariableDbForWork();
+    abstract protected void closeVariableDbAfterWork(SQLiteDatabase dbForWork);
 
     private Airport getAirportFromCursor(Cursor cursor){
         Airport resultAirport = new Airport();
@@ -38,29 +38,44 @@ public abstract class AirportsDbAbstract implements AirportsDb {
     @Override
     public Airport getAirportFromId(Integer airportId) {
         Airport resultAirport = new Airport();
-        Cursor cursor = dbForRead.query(AIRPORTS_TABLE_NAME,null," _id = ? ",
+        SQLiteDatabase dbForWork = getVariableDbForWork();
+        Cursor cursor = dbForWork.query(AIRPORTS_TABLE_NAME,null," _id = ? ",
                 new String[] {""+airportId},null,null,null);
         if (cursor != null && cursor.moveToFirst()) {
             resultAirport = getAirportFromCursor(cursor);
         }
+        closeCursor(cursor);
+        closeVariableDbAfterWork(dbForWork);
         return resultAirport;
+    }
+
+    private void closeCursor(Cursor cursor){
+        if (cursor!=null){
+            cursor.close();
+        }
     }
 
 
     @Override
     public void addAirport(Airport addedAirport) {
-        dbForWrite.insert(AIRPORTS_TABLE_NAME,null,getContentValues(addedAirport));
+        SQLiteDatabase dbForWork = getVariableDbForWork();
+        dbForWork.insert(AIRPORTS_TABLE_NAME, null, getContentValues(addedAirport));
+        closeVariableDbAfterWork(dbForWork);
     }
 
     @Override
     public void deleteAirport(Integer airportId) {
-        dbForWrite.delete(AIRPORTS_TABLE_NAME," _id = ? ", new String[] {""+airportId});
+        SQLiteDatabase dbForWork = getVariableDbForWork();
+        dbForWork.delete(AIRPORTS_TABLE_NAME, " _id = ? ", new String[]{"" + airportId});
+        closeVariableDbAfterWork(dbForWork);
     }
 
     @Override
     public void editAirport(Integer airportId, Airport editedAirport) {
-        dbForWrite.update(AIRPORTS_TABLE_NAME,getContentValues(editedAirport),
-                " _id = ? ", new String[] {""+airportId});
+        SQLiteDatabase dbForWork = getVariableDbForWork();
+        dbForWork.update(AIRPORTS_TABLE_NAME, getContentValues(editedAirport),
+                " _id = ? ", new String[]{"" + airportId});
+        closeVariableDbAfterWork(dbForWork);
     }
 
     private ContentValues getContentValues (Airport airport){
@@ -93,8 +108,9 @@ public abstract class AirportsDbAbstract implements AirportsDb {
         for (int i=0; i<searchedColumns; i++){
             searchedStrings[i] = "%"+searchedString+"%";
         }
-        List<Airport> resultAirports = new ArrayList<Airport>();
-        Cursor cursor = dbForRead.query(AIRPORTS_TABLE_NAME, null,
+        List<Airport> resultAirports = new ArrayList<>();
+        SQLiteDatabase dbForWork = getVariableDbForWork();
+        Cursor cursor = dbForWork.query(AIRPORTS_TABLE_NAME, null,
                 " (name_eng like ?) OR (name_rus like ?) OR " +
                         " (city_eng like ?) OR (city_rus like ?) OR " +
                         " (country_eng like ?) OR (country_rus like ?) OR " +
@@ -106,6 +122,8 @@ public abstract class AirportsDbAbstract implements AirportsDb {
                 resultAirports.add(getAirportFromCursor(cursor));
             }
         }
+        closeCursor(cursor);
+        closeVariableDbAfterWork(dbForWork);
         return resultAirports;
     }
 
@@ -116,8 +134,9 @@ public abstract class AirportsDbAbstract implements AirportsDb {
             "( latitude  between "+(airport.getLatitude()-3)+" and "+(airport.getLatitude()+3)+" ) AND " +
             "( _id<>"+airport.get_id()+" ) )";
 
-        List<Airport> resultAirports = new ArrayList<Airport>();
-        Cursor cursor = dbForRead.query(AIRPORTS_TABLE_NAME, null,whereString,null,null,null,null);
+        List<Airport> resultAirports = new ArrayList<>();
+        SQLiteDatabase dbForWork = getVariableDbForWork();
+        Cursor cursor = dbForWork.query(AIRPORTS_TABLE_NAME, null,whereString,null,null,null,null);
 
         if (cursor != null){
             Airport tempAirport;
@@ -128,6 +147,8 @@ public abstract class AirportsDbAbstract implements AirportsDb {
                 }
             }
         }
+        closeCursor(cursor);
+        closeVariableDbAfterWork(dbForWork);
         return resultAirports;
     }
     private Boolean isNearest(Airport airport, Airport tempAirport,Integer distanceForNearestAirports ){
@@ -135,18 +156,18 @@ public abstract class AirportsDbAbstract implements AirportsDb {
         //расстояние  = 111,11 * корень [ (дельта д * cos ш)^2 + (дельта ш) ^2]
         Float deltaLongitude = airport.getLongitude()-tempAirport.getLongitude();
         Float deltaLatitude = airport.getLatitude()-tempAirport.getLatitude();
-        Double distance = 111.11f * Math.sqrt (Math.pow(deltaLongitude*Math.cos(deltaLatitude),2)+Math.pow(deltaLatitude,2));
-        if (distance<=distanceForNearestAirports) {
-            return true;
-        } else {
-            return false;
-        }
+        Double distance = 111.11f * Math.sqrt (Math.pow(deltaLongitude*Math.cos(airport.getLatitude()),2)+Math.pow(deltaLatitude,2));
+        return (distance<=distanceForNearestAirports); //Boolean
     }
 
     @Override
     public Integer getSizeOfBase() {
-        Cursor cursor = dbForRead.query(AIRPORTS_TABLE_NAME,null,null,null,null,null,null);
-        return cursor.getCount();
+        SQLiteDatabase dbForWork = getVariableDbForWork();
+        Cursor cursor = dbForWork.query(AIRPORTS_TABLE_NAME,null,null,null,null,null,null);
+        Integer result = cursor.getCount();
+        closeCursor(cursor);
+        closeVariableDbAfterWork(dbForWork);
+        return result;
     }
 
     @Override
@@ -173,11 +194,13 @@ public abstract class AirportsDbAbstract implements AirportsDb {
         searchedStrings[4] = "%"+tempCountry+"%";
         searchedStrings[5] = searchedStrings[4];
 
-        Cursor cursor = dbForRead.query(AIRPORTS_TABLE_NAME, null,
+        SQLiteDatabase dbForWork = getVariableDbForWork();
+        Cursor cursor = dbForWork.query(AIRPORTS_TABLE_NAME, null,
                 " ((name_eng like ?) OR (name_rus like ?)) AND " +
                         " ((city_eng like ?) OR (city_rus like ?)) AND " +
                         " ((country_eng like ?) OR (country_rus like ?))",
                 searchedStrings,null,null,null);
+     //   closeVariableDbAfterWork(dbForWork);
         return cursor;
     }
 

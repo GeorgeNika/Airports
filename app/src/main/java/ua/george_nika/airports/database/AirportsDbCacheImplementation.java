@@ -14,11 +14,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import ua.george_nika.airports.R;
-import ua.george_nika.airports.data.GlobalContextData;
+import ua.george_nika.airports.data.GlobalContextAndData;
 
-/**
- * Created by George on 21.03.2015.
- */
 public class AirportsDbCacheImplementation extends AirportsDbAbstract{
 
     private static final String DB_NAME = "airports.db";
@@ -26,7 +23,7 @@ public class AirportsDbCacheImplementation extends AirportsDbAbstract{
     private static Context DbContext;
 
     static {
-        DbContext = GlobalContextData.getContext();
+        DbContext = GlobalContextAndData.getContext();
         //получаем путь к SD-карте.
         File DB_PATH = DbContext.getExternalCacheDir();
         DB_PATH.mkdirs();
@@ -37,8 +34,7 @@ public class AirportsDbCacheImplementation extends AirportsDbAbstract{
     @Override
     public void preparedDbForWork() {
         createDataBase();
-        dbForRead = SQLiteDatabase.openDatabase(dbFile.getAbsolutePath(), null, SQLiteDatabase.OPEN_READWRITE);
-        dbForWrite = dbForRead;
+        closeDbAfterWork();
     }
 
     private void createDataBase()  {
@@ -79,14 +75,19 @@ public class AirportsDbCacheImplementation extends AirportsDbAbstract{
         }
     }
 
+    @Override
+    protected SQLiteDatabase getVariableDbForWork() {
+        return SQLiteDatabase.openDatabase(dbFile.getAbsolutePath(), null, SQLiteDatabase.OPEN_READWRITE);
+    }
+
+    @Override
+    public void closeVariableDbAfterWork(SQLiteDatabase dbForWork) {
+        if (dbForWork !=null){
+            dbForWork.close();
+        }
+    }
 
     @Override
     public void closeDbAfterWork() {
-        if (dbForRead!=null){
-            dbForRead.close();
-        }
-        if (dbForWrite!=null){
-            dbForWrite.close();
-        }
     }
 }

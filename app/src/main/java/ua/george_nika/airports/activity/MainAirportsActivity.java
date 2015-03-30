@@ -50,11 +50,11 @@ public class MainAirportsActivity extends ActionBarActivity {
 
     private void setListeners(){
         // todo rename button
-        Button buttonDb = (Button) findViewById(R.id.button1);
+        Button buttonDb = (Button) findViewById(R.id.button_edit_airports);
         buttonDb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), AirportsEditActivity.class));
+                startActivity(new Intent(MainAirportsActivity.this, AirportsEditActivity.class));
                 mainDrawerLayout.closeDrawers();
             }
         });
@@ -64,7 +64,7 @@ public class MainAirportsActivity extends ActionBarActivity {
         buttonHttp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  startActivity(new Intent(v.getContext(), MapActivity.class));
+              //  startActivity(new Intent(MainAirportsActivity.this, MapActivity.class));
                 mainDrawerLayout.closeDrawers();
             }
         });
@@ -73,17 +73,41 @@ public class MainAirportsActivity extends ActionBarActivity {
         buttonLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  startActivity(new Intent(v.getContext(), LocationActivity.class));
+              //  startActivity(new Intent(MainAirportsActivity.this, LocationActivity.class));
                 mainDrawerLayout.closeDrawers();
             }
         });
 
-        Button buttonGoogleMap = (Button) findViewById(R.id.button4);
-        buttonGoogleMap.setOnClickListener(new View.OnClickListener() {
+        Button buttonProperty = (Button) findViewById(R.id.button_property);
+        buttonProperty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), GoogleMapActivity.class));
+                startActivity(new Intent(MainAirportsActivity.this, PropertyActivity.class));
                 mainDrawerLayout.closeDrawers();
+            }
+        });
+
+        Button buttonFlightRadar24 = (Button) findViewById(R.id.button_website_flightradar24);
+        buttonFlightRadar24.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startBrowserActivity("www.flightradar24.com");
+            }
+        });
+
+        Button buttonPlaneFinder = (Button) findViewById(R.id.button_website_planefinder);
+        buttonPlaneFinder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startBrowserActivity("www.planefinder.net");
+            }
+        });
+
+        Button buttonFlightAware = (Button) findViewById(R.id.button_website_flightaware);
+        buttonFlightAware.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startBrowserActivity("www.flightaware.com");
             }
         });
 
@@ -94,6 +118,12 @@ public class MainAirportsActivity extends ActionBarActivity {
                 airportTitle.setText(airport.getName_eng());
             }
         });
+    }
+
+    private void startBrowserActivity(String webSite){
+        Intent intent = new Intent(MainAirportsActivity.this,BrowseWebSiteActivity.class);
+        intent.putExtra(BrowseWebSiteActivity.EXTRA_WEB_SITE,webSite);
+        startActivity(intent);
     }
 
     private void setToolbarForDrawerLayout(){

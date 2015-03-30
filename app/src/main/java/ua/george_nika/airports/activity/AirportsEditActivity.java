@@ -24,7 +24,6 @@ import ua.george_nika.airports.R;
 
 public class AirportsEditActivity extends Activity {
 
-    private CursorAdapter airportsAdapter;
     private ListView listAirports;
     private SearchView searchAirportName;
     private SearchView searchAirportCity;
@@ -48,7 +47,7 @@ public class AirportsEditActivity extends Activity {
     }
 
     private void setAdapters(){
-        airportsAdapter = new SimpleCursorAdapter( this,
+        CursorAdapter airportsAdapter = new SimpleCursorAdapter( this,
                 R.layout.item_airports_list,
                 FactoryDb.getInstance().getAirportsDb().getCursorWithSearchedStrings(
                         searchAirportName.getQuery().toString(),
@@ -66,7 +65,7 @@ public class AirportsEditActivity extends Activity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AirportAddDialog(v.getContext(),null,null).showAirportDialog();
+                new AirportAddDialog(v.getContext()).showAirportDialog();
             }
         });
 
@@ -100,6 +99,22 @@ public class AirportsEditActivity extends Activity {
 
     private void searchAirportAction(){
         setAdapters();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("searchAirportName", searchAirportName.getQuery().toString());
+        outState.putString("searchAirportCity", searchAirportCity.getQuery().toString());
+        outState.putString("searchAirportCountry", searchAirportCountry.getQuery().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        searchAirportName.setQuery(savedInstanceState.getString("searchAirportName"), false);
+        searchAirportCity.setQuery(savedInstanceState.getString("searchAirportCity"), false);
+        searchAirportCountry.setQuery(savedInstanceState.getString("searchAirportCountry"), false);
     }
 
 
@@ -164,11 +179,6 @@ public class AirportsEditActivity extends Activity {
                     //todo why need set id? why id-empty?
                     airport.set_id(_id);
                     intent.putExtra(GoogleMapActivity.EXTRA_FIRST_AIRPORT, airport);
-                    //todo  remove second airport
-                    Airport secondAirport = new Airport();
-                    secondAirport.setLatitude(50f);
-                    secondAirport.setLongitude(30f);
-                    intent.putExtra(GoogleMapActivity.EXTRA_SECOND_AIRPORT,secondAirport);
                     startActivity(intent);
                 }
             });
@@ -194,7 +204,7 @@ public class AirportsEditActivity extends Activity {
             FactoryDb.getInstance().getAirportsDb().editAirport(_id,airport);
             setAdapters();
         }
-        protected void deleteAirportFromDb(DialogInterface dialog){
+        protected void deleteAirportFromDb(){
             FactoryDb.getInstance().getAirportsDb().deleteAirport(_id);
             setAdapters();
         }
@@ -248,7 +258,7 @@ public class AirportsEditActivity extends Activity {
 
     private class AirportAddDialog extends AirportDialog{
 
-        protected AirportAddDialog(Context context, Integer _id, Airport airport) {
+        protected AirportAddDialog(Context context) {
             super(context, null, null);
         }
 
@@ -296,7 +306,7 @@ public class AirportsEditActivity extends Activity {
             builder.setNegativeButton("DELETE", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    deleteAirportFromDb(dialog);
+                    deleteAirportFromDb();
                 }
             });
 

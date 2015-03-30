@@ -32,7 +32,7 @@
 
     <!-- The navigation drawer -->
 
-    <LinearLayout
+    <ScrollView
         android:id="@+id/left_drawer"
         android:layout_width="240dp"
         android:layout_height="match_parent"
@@ -44,32 +44,58 @@
         android:background="#80158dd0" >
         <!-- "#80158dd0" -->
 
+        <LinearLayout
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/button_edit_airports"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Airports"/>
 
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="button DB"/>
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="button2 HTTP"/>
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="button2 HTTP"/>
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="button3 Location"/>
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="button3 Location"/>
+            <Button
+                android:id="@+id/button_property"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Property"/>
 
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="GoogleMap"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#FF158dd0" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/button_website_flightradar24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FlightRadar24.com"/>
+
+            <Button
+                android:id="@+id/button_website_planefinder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PlaneFinder.net"/>
+
+            <Button
+                android:id="@+id/button_website_flightaware"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FlightAware.com"/>
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.v4.widget.DrawerLayout>
 

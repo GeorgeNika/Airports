@@ -1,16 +1,10 @@
 package ua.george_nika.airports.database;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ua.george_nika.airports.data.Airport;
-import ua.george_nika.airports.data.GlobalContextData;
+import ua.george_nika.airports.data.GlobalContextAndData;
 
 public class AirportsDbInternalImplementation extends AirportsDbAbstract{
 
@@ -22,21 +16,26 @@ public class AirportsDbInternalImplementation extends AirportsDbAbstract{
 
     @Override
     public void preparedDbForWork() {
-        internalDb = new InternalDb(GlobalContextData.getContext());
-        dbForRead = internalDb.getWritableDatabase();
-        dbForWrite = internalDb.getWritableDatabase();
+        internalDb = new InternalDb(GlobalContextAndData.getContext());
+        closeDbAfterWork();
+    }
+
+    @Override
+    protected SQLiteDatabase getVariableDbForWork() {
+        return internalDb.getWritableDatabase();
+    }
+
+    @Override
+    protected void closeVariableDbAfterWork(SQLiteDatabase dbForWork) {
+        if (dbForWork !=null){
+            dbForWork.close();
+        }
     }
 
     @Override
     public void closeDbAfterWork() {
         if (internalDb!=null){
             internalDb.close();
-        }
-        if (dbForRead!=null){
-            dbForRead.close();
-        }
-        if (dbForWrite!=null){
-            dbForWrite.close();
         }
     }
 

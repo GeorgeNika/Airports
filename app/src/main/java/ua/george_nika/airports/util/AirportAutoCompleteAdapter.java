@@ -26,7 +26,7 @@ public class AirportAutoCompleteAdapter extends BaseAdapter implements Filterabl
 
     public AirportAutoCompleteAdapter(Context localContext) {
         this.localContext = localContext;
-        resultAirports = new ArrayList<Airport>();
+        resultAirports = new ArrayList<>();
     }
 
     @Override

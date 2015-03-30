@@ -20,7 +20,7 @@
 
     <!-- The navigation drawer -->
 
-    <LinearLayout
+    <ScrollView
         android:id="@+id/left_drawer"
         android:layout_width="240dp"
         android:layout_height="match_parent"
@@ -31,37 +31,47 @@
         android:orientation="vertical"
         android:background="#80158dd0">
 
-        <Button
-            android:id="@+id/button_map_type_normal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="map_type_normal"/>
-        <Button
-            android:id="@+id/button_map_type_satellite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="map_type_satellite"/>
-        <Button
-            android:id="@+id/button_map_type_hybrid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="map_type_hybrid"/>
-        <Button
-            android:id="@+id/button_map_type_terrain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="map_type_terrain"/>
-        <Button
-            android:id="@+id/button_map_show_nearest_airport"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="map_show_nearest_airport"/>
-        <Button
-            android:id="@+id/button_map_show_my_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="map_show_my_location"/>
-    </LinearLayout>
+        <LinearLayout
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_map_type_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="map_type_normal"/>
+            <Button
+                android:id="@+id/button_map_type_satellite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="map_type_satellite"/>
+            <Button
+                android:id="@+id/button_map_type_hybrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="map_type_hybrid"/>
+            <Button
+                android:id="@+id/button_map_type_terrain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="map_type_terrain"/>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#FF158dd0" />
+            <Button
+                android:id="@+id/button_map_show_nearest_airport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="map_show_nearest_airport"/>
+            <Button
+                android:id="@+id/button_map_show_my_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="map_show_my_location"/>
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.v4.widget.DrawerLayout>
 

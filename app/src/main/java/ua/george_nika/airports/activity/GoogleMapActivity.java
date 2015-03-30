@@ -2,7 +2,10 @@ package ua.george_nika.airports.activity;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,15 +20,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ua.george_nika.airports.R;
 import ua.george_nika.airports.data.Airport;
+import ua.george_nika.airports.data.GlobalContextAndData;
 import ua.george_nika.airports.database.FactoryDb;
 
 public class GoogleMapActivity extends ActionBarActivity {
@@ -40,6 +42,7 @@ public class GoogleMapActivity extends ActionBarActivity {
     private Toolbar googleMapToolbar;
     private GoogleMap globalGoogleMap;
     private GoogleMapReady googleMapReady =new GoogleMapReady();
+    private MapFragment mapFragment;
 
     private Airport firstAirport ;
     private Airport secondAirport ;
@@ -72,9 +75,19 @@ public class GoogleMapActivity extends ActionBarActivity {
         setListeners();
         setToolbarForDrawerLayout();
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.google_map);
-        mapFragment.getMapAsync(googleMapReady);
+
+
+        if (mapFragment == null) {
+            mapFragment = (MapFragment) getFragmentManager()
+                    .findFragmentById(R.id.google_map);
+            if (savedInstanceState == null) {
+                mapFragment.getMapAsync(googleMapReady);
+                globalGoogleMap = mapFragment.getMap();
+                mapFragment.setRetainInstance(true);
+            } else {
+                globalGoogleMap = mapFragment.getMap();
+            }
+        }
     }
 
     private void initializeVariables(){
@@ -88,6 +101,7 @@ public class GoogleMapActivity extends ActionBarActivity {
         Button buttonSetHybridType = (Button) findViewById(R.id.button_map_type_hybrid);
         Button buttonSetTerrainType = (Button) findViewById(R.id.button_map_type_terrain);
         Button buttonShowNearest  = (Button) findViewById(R.id.button_map_show_nearest_airport);
+        Button buttonShowMyLocation  = (Button) findViewById(R.id.button_map_show_my_location);
 
         buttonSetNormalType.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,13 +138,38 @@ public class GoogleMapActivity extends ActionBarActivity {
         buttonShowNearest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Integer distanceForNearestAirports = 160;
+                Integer distanceForNearestAirports = GlobalContextAndData.getKmToNearestAirports();
                 List<Airport> nearestAirports = FactoryDb.getInstance().getAirportsDb().getNearestAirports(firstAirport,distanceForNearestAirports);
                 for (Airport airport :nearestAirports){
                     globalGoogleMap.addMarker(new MarkerOptions()
                             .icon(BitmapDescriptorFactory.fromResource(R.mipmap.airport_marker))
                             .title(airport.getName_eng())
                             .position(new LatLng(airport.getLatitude(), airport.getLongitude())));
+                }
+                googleMapDrawerLayout.closeDrawers();
+            }
+        });
+
+        buttonShowMyLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+                boolean enabled = locationManager
+                        .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                if (!enabled) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+
+                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if  (location==null) {
+                    location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                }
+
+                if (location != null) {
+                    LatLng myLatLng = new LatLng(location.getLatitude(),location.getLongitude());
+                    globalGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, GlobalContextAndData.getZoomOnMap()));
                 }
                 googleMapDrawerLayout.closeDrawers();
             }
@@ -208,24 +247,22 @@ public class GoogleMapActivity extends ActionBarActivity {
     private class GoogleMapReady implements OnMapReadyCallback {
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            globalGoogleMap = googleMap;
+            if (firstAirport==null) {return;}
             LatLng airportLatLng = new LatLng(firstAirport.getLatitude(), firstAirport.getLongitude());
-
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(airportLatLng, 12));
-
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(airportLatLng, GlobalContextAndData.getZoomOnMap()));
             googleMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.airport_marker))
                     .title(firstAirport.getName_eng())
                     .position(airportLatLng)
             );
 
-            if (!secondAirport.equals(firstAirport)) {
-                googleMap.addMarker(new MarkerOptions()
-                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.airport_marker))
-                        .title(secondAirport.getName_eng())
-                        .position(new LatLng(secondAirport.getLatitude(), secondAirport.getLongitude()))
-                );
-            }
+            if (secondAirport==null) { return;}
+            googleMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.airport_marker))
+                    .title(secondAirport.getName_eng())
+                    .position(new LatLng(secondAirport.getLatitude(), secondAirport.getLongitude()))
+            );
+
         }
     }
 }

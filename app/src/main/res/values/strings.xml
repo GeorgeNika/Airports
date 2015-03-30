@@ -7,11 +7,15 @@
     <string name="title_activity_browse_web_site">BrowseWebSiteActivity</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="add_button">ADD NEW</string>
     <string name="title_activity_location">LocationActivity</string>
     <string name="main_drawer_open">main_drawer_open</string>
     <string name="main_drawer_close">main_drawer_close</string>
+    <string name="property">Property</string>
+    <string name="zoom_for_map">Zoom for map</string>
+    <string name="how_much_km">How much km to nearest airport</string>
+    <string name="apply">APPLY</string>
+    <string name="cancel">CANCEL</string>
+    <string name="default_settings">DEFAULT</string>
 </resources>
