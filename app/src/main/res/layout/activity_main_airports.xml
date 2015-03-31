@@ -14,19 +14,43 @@
         <include
             android:id="@+id/main_toolbar"
             layout="@layout/toolbar"/>
-
+        <Space
+            android:id="@+id/space_top"
+            android:layout_width="match_parent"
+            android:layout_below="@id/main_toolbar"
+            android:layout_height="20dp" />
         <TextView
-            android:id="@+id/text_hello"
+            android:id="@+id/text_airport_from"
+            android:text="FROM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/space_top"
+            android:background="@drawable/rounded_background"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/text_find_airport_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/text_airport_from"
+            android:background="@drawable/rounded_background"/>
+        <TextView
+            android:id="@+id/text_airport_to"
             android:text="@string/hello_world"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/main_toolbar"/>
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/text_find_airport_from"
+            android:background="@drawable/rounded_background"/>
 
         <AutoCompleteTextView
-            android:id="@+id/text_find_airport"
+            android:id="@+id/text_find_airport_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_hello"/>
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/text_airport_to"
+            android:background="@drawable/rounded_background"/>
 
     </RelativeLayout>
 
@@ -49,22 +73,39 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <Button
+                android:id="@+id/button_web_from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Web ..."/>
+
+            <Button
+                android:id="@+id/button_map_from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Map ..."/>
+
+            <Button
+                android:id="@+id/button_web_to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Web ..."/>
+
+            <Button
+                android:id="@+id/button_map_to"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Map ..."/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@drawable/rounded_background" />
+
+            <Button
                 android:id="@+id/button_edit_airports"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Edit Airports"/>
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="button2 HTTP"/>
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="button3 Location"/>
 
             <Button
                 android:id="@+id/button_property"
@@ -74,8 +115,8 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="#FF158dd0" />
+                android:layout_height="5dp"
+                android:background="@drawable/rounded_background" />
 
             <Button
                 android:id="@+id/button_website_flightradar24"

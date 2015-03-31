@@ -30,10 +30,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MainAirportsActivity">
+            android:name=".activity.MainAirportsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
-            android:name=".activity.AirportsEditActivity">
+            android:name=".activity.AirportsEditActivity"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name=".activity.BrowseWebSiteActivity">

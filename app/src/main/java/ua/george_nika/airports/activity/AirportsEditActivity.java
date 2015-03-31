@@ -61,7 +61,7 @@ public class AirportsEditActivity extends Activity {
     }
 
     private void setListeners(){
-        ImageButton addButton = (ImageButton)findViewById(R.id.button_add);
+        Button addButton = (Button)findViewById(R.id.button_add);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,14 +180,6 @@ public class AirportsEditActivity extends Activity {
                     airport.set_id(_id);
                     intent.putExtra(GoogleMapActivity.EXTRA_FIRST_AIRPORT, airport);
                     startActivity(intent);
-                }
-            });
-
-            Button jumpToYandexMap = (Button)view.findViewById(R.id.button_yandex_map);
-            jumpToYandexMap.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //todo goto yandex map
                 }
             });
         }
