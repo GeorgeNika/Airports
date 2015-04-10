@@ -33,29 +33,29 @@
 
         <LinearLayout
         android:layout_width="240dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
             <Button
                 android:id="@+id/button_map_type_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="map_type_normal"/>
+                android:text="@string/map_type_normal"/>
             <Button
                 android:id="@+id/button_map_type_satellite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="map_type_satellite"/>
+                android:text="@string/map_type_satellite"/>
             <Button
                 android:id="@+id/button_map_type_hybrid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="map_type_hybrid"/>
+                android:text="@string/map_type_hybrid"/>
             <Button
                 android:id="@+id/button_map_type_terrain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="map_type_terrain"/>
+                android:text="@string/map_type_terrain"/>
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -64,12 +64,12 @@
                 android:id="@+id/button_map_show_nearest_airport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="map_show_nearest_airport"/>
+                android:text="@string/map_show_nearest_airports"/>
             <Button
                 android:id="@+id/button_map_show_my_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="map_show_my_location"/>
+                android:text="@string/map_show_my_location"/>
         </LinearLayout>
     </ScrollView>
 

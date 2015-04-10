@@ -16,13 +16,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="1"
-            android:text="Go to web site"/>
+            android:text="@string/dialog_go_web"/>
         <Button
             android:id="@+id/button_google_map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="2"
-            android:text="Show in google maps"/>
+            android:text="@string/dialog_show_google_map"/>
     </TableRow>
     <TableRow
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
         <TextView
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="Airport name"
+            android:text="@string/dialog_text_airport_name"
             android:id="@+id/textView"
             android:layout_column="1" />
 
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_name_eng"
             android:layout_column="2"
-            android:hint="airport name" />
+            android:hint="@string/dialog_hint_airport_name" />
     </TableRow>
     <TableRow
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
         <TextView
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="Имя аэропорта"
+            android:text="@string/dialog_text_name_airport_rus"
             android:id="@+id/textView5"
             android:layout_column="1" />
 
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_name_rus"
             android:layout_column="2"
-            android:hint="название аэропорта" />
+            android:hint="@string/dialog_hint_airport_name_rus" />
 
     </TableRow>
     <TableRow
@@ -70,7 +70,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="City name"
+            android:text="@string/dialog_text_city_name"
             android:id="@+id/textView2"
             android:layout_column="1" />
 
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_city_eng"
             android:layout_column="2"
-            android:hint="city name" />
+            android:hint="@string/dialog_hint_city_name" />
     </TableRow>
     <TableRow
         android:layout_width="match_parent"
@@ -89,7 +89,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Город"
+            android:text="@string/dialog_text_city_name_rus"
             android:id="@+id/textView6"
             android:layout_column="1" />
 
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_city_rus"
             android:layout_column="2"
-            android:hint="название города" />
+            android:hint="@string/dialog_hint_city_name_rus" />
     </TableRow>
 
     <TableRow
@@ -109,7 +109,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Country name"
+            android:text="@string/dialog_text_country_name"
             android:id="@+id/textView3"
             android:layout_column="1" />
 
@@ -118,7 +118,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_country_eng"
             android:layout_column="2"
-            android:hint="country name" />
+            android:hint="@string/dialog_hint_country_name" />
     </TableRow>
     <TableRow
         android:layout_width="match_parent"
@@ -128,7 +128,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Страна"
+            android:text="@string/dialog_text_country_name_rus"
             android:id="@+id/textView7"
             android:layout_column="1" />
 
@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_country_rus"
             android:layout_column="2"
-            android:hint="название страны" />
+            android:hint="@string/dialog_hint_country_name_rus" />
     </TableRow>
 
     <TableRow
@@ -148,7 +148,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Country ISO code"
+            android:text="@string/dialog_text_county_code"
             android:id="@+id/textView4"
             android:layout_column="1" />
 
@@ -157,7 +157,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_iso_code"
             android:layout_column="2"
-            android:hint="like UK, FR" />
+            android:hint="@string/dialog_hint_county_code" />
     </TableRow>
     <TableRow
         android:layout_width="match_parent"
@@ -167,7 +167,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time GMT offset"
+            android:text="@string/dialog_text_gmt_offset"
             android:id="@+id/textView8"
             android:layout_column="1" />
 
@@ -178,7 +178,7 @@
             android:ems="10"
             android:id="@+id/edit_gmt_offset"
             android:layout_column="2"
-            android:hint="grinvich offset" />
+            android:hint="@string/dialog_hint_gmt_offset" />
 
     </TableRow>
 
@@ -190,8 +190,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Airport IATA"
+            android:text="@string/dialog_text_iata_code"
             android:id="@+id/textView9"
             android:layout_column="1" />
 
@@ -200,7 +199,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_iata_code"
             android:layout_column="2"
-            android:hint="HRK" />
+            android:hint="@string/dialog_hint_iata_code" />
 
     </TableRow>
     <TableRow
@@ -210,8 +209,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Airport ICAO"
+            android:text="@string/dialog_text_icao_code"
             android:id="@+id/textView10"
             android:layout_column="1" />
 
@@ -220,7 +218,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_icao_code"
             android:layout_column="2"
-            android:hint="AAAA" />
+            android:hint="@string/dialog_hint_icao_code" />
     </TableRow>
 
     <TableRow
@@ -231,7 +229,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Latitude"
+            android:text="@string/dialog_text_latitude"
             android:id="@+id/textView11"
             android:layout_column="1" />
 
@@ -242,7 +240,7 @@
             android:ems="10"
             android:id="@+id/edit_latitude"
             android:layout_column="2"
-            android:hint="0.00" />
+            android:hint="@string/dialog_hint_latitude" />
 
     </TableRow>
     <TableRow
@@ -252,7 +250,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Longtitude"
+            android:text="@string/dialog_text_longitude"
             android:id="@+id/textView12"
             android:layout_column="1" />
 
@@ -263,7 +261,7 @@
             android:ems="10"
             android:id="@+id/edit_longtitude"
             android:layout_column="2"
-            android:hint="0.00" />
+            android:hint="@string/dialog_hint_longitude" />
 
     </TableRow>
 
@@ -275,7 +273,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Airport web site"
+            android:text="@string/dialog_text_web"
             android:id="@+id/textView13"
             android:layout_column="1" />
 
@@ -284,7 +282,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edit_website"
             android:layout_column="2"
-            android:hint="www." />
+            android:hint="@string/dialog_hint_web" />
 
     </TableRow>
 

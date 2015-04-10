@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Airports</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_airports_edit">AirportsEditActivity</string>
     <string name="title_activity_browse_web_site">BrowseWebSiteActivity</string>
@@ -18,4 +17,44 @@
     <string name="apply">APPLY</string>
     <string name="cancel">CANCEL</string>
     <string name="default_settings">DEFAULT</string>
+    <string name="main_text_from">FROM</string>
+    <string name="main_text_to">TO</string>
+    <string name="map_type_normal">Map type - Normal</string>
+    <string name="map_type_satellite">Map type - Satellite</string>
+    <string name="map_type_hybrid">Map type - Hybrid</string>
+    <string name="map_type_terrain">Map type - Terrain</string>
+    <string name="map_show_nearest_airports">Show nearest airports</string>
+    <string name="map_show_my_location">Show my location</string>
+    <string name="main_web">Web ...</string>
+    <string name="main_map">Map ...</string>
+    <string name="main_db_airports">Edit base of airports</string>
+    <string name="main_property">Property</string>
+    <string name="dialog_hint_web">www.</string>
+    <string name="dialog_show_google_map">Show in google maps</string>
+    <string name="dialog_text_airport_name">Airport name</string>
+    <string name="dialog_hint_airport_name">airport name</string>
+    <string name="dialog_go_web">Go to web site</string>
+    <string name="dialog_text_name_airport_rus">Имя аэропорта</string>
+    <string name="dialog_hint_airport_name_rus">название аэропорта</string>
+    <string name="dialog_hint_city_name">city name</string>
+    <string name="dialog_hint_city_name_rus">название города</string>
+    <string name="dialog_hint_country_name">country name</string>
+    <string name="dialog_hint_country_name_rus">название страны</string>
+    <string name="dialog_hint_county_code">like UK, FR</string>
+    <string name="dialog_hint_gmt_offset">+ or - to grinvich time</string>
+    <string name="dialog_hint_iata_code">3 letters like GFK, HRK</string>
+    <string name="dialog_hint_icao_code">4 letters like AAAA</string>
+    <string name="dialog_hint_latitude">+/- 00.00</string>
+    <string name="dialog_hint_longitude">+/- 00.00</string>
+    <string name="dialog_text_web">Airport web site</string>
+    <string name="dialog_text_longitude">Longitude</string>
+    <string name="dialog_text_latitude">Latitude</string>
+    <string name="dialog_text_icao_code">Airport ICAO code</string>
+    <string name="dialog_text_iata_code">Airport IATA code</string>
+    <string name="dialog_text_gmt_offset">Time GMT offset</string>
+    <string name="dialog_text_county_code">Country ISO code</string>
+    <string name="dialog_text_country_name_rus">Страна</string>
+    <string name="dialog_text_country_name">Country name</string>
+    <string name="dialog_text_city_name_rus">Город</string>
+    <string name="dialog_text_city_name">City name</string>
 </resources>

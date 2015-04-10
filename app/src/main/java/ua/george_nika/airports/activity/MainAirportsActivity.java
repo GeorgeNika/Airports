@@ -76,12 +76,12 @@ public class MainAirportsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if (fromAirport!=null){
-                    if (fromAirport.getWebsite()!=null){
+                    if (fromAirport.getWebsite().contains(".")) {
                         Intent intent = new Intent(MainAirportsActivity.this,BrowseWebSiteActivity.class);
                         intent.putExtra(BrowseWebSiteActivity.EXTRA_WEB_SITE,fromAirport.getWebsite());
                         startActivity(intent);
                     }else{
-                        Toast.makeText(getApplicationContext(),"No web site",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"No correct web site",Toast.LENGTH_SHORT).show();
                     }
 
                 }else {
@@ -96,8 +96,6 @@ public class MainAirportsActivity extends ActionBarActivity {
             public void onClick(View v) {
                 if (fromAirport!=null) {
                     Intent intent = new Intent(MainAirportsActivity.this, GoogleMapActivity.class);
-                    //todo why need set id? why id-empty?
-                    //fromAirport.set_id(_id);
                     intent.putExtra(GoogleMapActivity.EXTRA_FIRST_AIRPORT, fromAirport);
                     startActivity(intent);
                 } else{
@@ -111,14 +109,13 @@ public class MainAirportsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if (toAirport!=null){
-                    if (toAirport.getWebsite()!=null){
+                    if (toAirport.getWebsite().contains(".")){
                         Intent intent = new Intent(MainAirportsActivity.this,BrowseWebSiteActivity.class);
                         intent.putExtra(BrowseWebSiteActivity.EXTRA_WEB_SITE,toAirport.getWebsite());
                         startActivity(intent);
                     }else{
-                        Toast.makeText(getApplicationContext(),"No web site",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"No correct web site",Toast.LENGTH_SHORT).show();
                     }
-
                 }else {
                     Toast.makeText(getApplicationContext(),"No airport",Toast.LENGTH_SHORT).show();
                 }
@@ -131,8 +128,6 @@ public class MainAirportsActivity extends ActionBarActivity {
             public void onClick(View v) {
                 if (toAirport!=null) {
                     Intent intent = new Intent(MainAirportsActivity.this, GoogleMapActivity.class);
-                    //todo why need set id? why id-empty?
-                    //toAirport.set_id(_id);
                     intent.putExtra(GoogleMapActivity.EXTRA_FIRST_AIRPORT, toAirport);
                     startActivity(intent);
                 } else{
@@ -165,6 +160,7 @@ public class MainAirportsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 startBrowserActivity("www.flightradar24.com");
+                mainDrawerLayout.closeDrawers();
             }
         });
 
@@ -173,6 +169,7 @@ public class MainAirportsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 startBrowserActivity("www.planefinder.net");
+                mainDrawerLayout.closeDrawers();
             }
         });
 
@@ -181,6 +178,16 @@ public class MainAirportsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 startBrowserActivity("www.flightaware.com");
+                mainDrawerLayout.closeDrawers();
+            }
+        });
+
+        Button buttonHTTP = (Button) findViewById(R.id.button_http);
+        buttonHTTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainAirportsActivity.this, HTTPActivity.class));
+                mainDrawerLayout.closeDrawers();
             }
         });
 
@@ -190,7 +197,7 @@ public class MainAirportsActivity extends ActionBarActivity {
                 Airport airport = (Airport) adapterView.getItemAtPosition(position);
                 fromAirportAutoComplete.setText(airport.getName_eng());
                 fromAirport=airport;
-                setButtonsName();
+                setButtonsNameAndEnabled();
             }
         });
 
@@ -200,7 +207,7 @@ public class MainAirportsActivity extends ActionBarActivity {
                 Airport airport = (Airport) adapterView.getItemAtPosition(position);
                 toAirportAutoComplete.setText(airport.getName_eng());
                 toAirport=airport;
-                setButtonsName();
+                setButtonsNameAndEnabled();
             }
         });
     }
@@ -209,6 +216,7 @@ public class MainAirportsActivity extends ActionBarActivity {
         Intent intent = new Intent(MainAirportsActivity.this,BrowseWebSiteActivity.class);
         intent.putExtra(BrowseWebSiteActivity.EXTRA_WEB_SITE,webSite);
         startActivity(intent);
+
     }
 
     private void setToolbarForDrawerLayout(){
@@ -250,14 +258,18 @@ public class MainAirportsActivity extends ActionBarActivity {
         mainActionBarDrawerToggle.syncState();
     }
 
-    private void setButtonsName(){
+    private void setButtonsNameAndEnabled(){
         if (fromAirport!=null){
             buttonMapFrom.setText("Map - " + fromAirport.getName_eng());
+            buttonMapFrom.setEnabled(true);
             buttonWebFrom.setText("Web - " + fromAirport.getName_eng());
+            buttonWebFrom.setEnabled(true);
         }
         if (toAirport!=null) {
             buttonMapTo.setText("Map - " + toAirport.getName_eng());
+            buttonMapTo.setEnabled(true);
             buttonWebTo.setText("Web - " + toAirport.getName_eng());
+            buttonWebTo.setEnabled(true);
         }
     }
 
@@ -298,7 +310,7 @@ public class MainAirportsActivity extends ActionBarActivity {
         super.onRestoreInstanceState(savedInstanceState);
         fromAirport=savedInstanceState.getParcelable("fromAirport");
         toAirport=savedInstanceState.getParcelable("toAirport");
-        setButtonsName();
+        setButtonsNameAndEnabled();
     }
 
     @Override

@@ -21,7 +21,7 @@
             android:layout_height="20dp" />
         <TextView
             android:id="@+id/text_airport_from"
-            android:text="FROM"
+            android:text="@string/main_text_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -37,7 +37,7 @@
             android:background="@drawable/rounded_background"/>
         <TextView
             android:id="@+id/text_airport_to"
-            android:text="@string/hello_world"
+            android:text="@string/main_text_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -70,52 +70,56 @@
 
         <LinearLayout
             android:layout_width="240dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <Button
                 android:id="@+id/button_web_from"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Web ..."/>
+                android:text="@string/main_web"
+                android:enabled="false"/>
 
             <Button
                 android:id="@+id/button_map_from"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Map ..."/>
+                android:text="@string/main_map"
+                android:enabled="false"/>
 
             <Button
                 android:id="@+id/button_web_to"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Web ..."/>
+                android:text="@string/main_web"
+                android:enabled="false"/>
 
             <Button
                 android:id="@+id/button_map_to"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Map ..."/>
+                android:text="@string/main_map"
+                android:enabled="false"/>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="10dp"
                 android:background="@drawable/rounded_background" />
 
             <Button
                 android:id="@+id/button_edit_airports"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Airports"/>
+                android:text="@string/main_db_airports"/>
 
             <Button
                 android:id="@+id/button_property"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Property"/>
+                android:text="@string/main_property"/>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="10dp"
                 android:background="@drawable/rounded_background" />
 
             <Button
@@ -135,6 +139,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="FlightAware.com"/>
+
+            <Button
+                android:id="@+id/button_http"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Search http request"
+                android:enabled="false"/>
         </LinearLayout>
     </ScrollView>
 

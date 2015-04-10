@@ -129,7 +129,9 @@ public class Airport implements Parcelable{
     }
 
     public String getWebsite() {
-        return website;
+        String result = website;
+        if (result== null) {result = "";}
+        return result;
     }
 
     public void setWebsite(String website) {
