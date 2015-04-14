@@ -77,28 +77,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_web"
-                android:enabled="false"/>
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/button_map_from"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_map"
-                android:enabled="false"/>
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/button_web_to"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_web"
-                android:enabled="false"/>
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/button_map_to"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/main_map"
-                android:enabled="false"/>
+                android:visibility="gone"/>
 
             <Space
                 android:layout_width="match_parent"

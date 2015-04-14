@@ -261,15 +261,15 @@ public class MainAirportsActivity extends ActionBarActivity {
     private void setButtonsNameAndEnabled(){
         if (fromAirport!=null){
             buttonMapFrom.setText("Map - " + fromAirport.getName_eng());
-            buttonMapFrom.setEnabled(true);
+            buttonMapFrom.setVisibility(View.VISIBLE);
             buttonWebFrom.setText("Web - " + fromAirport.getName_eng());
-            buttonWebFrom.setEnabled(true);
+            buttonWebFrom.setVisibility(View.VISIBLE);;
         }
         if (toAirport!=null) {
             buttonMapTo.setText("Map - " + toAirport.getName_eng());
-            buttonMapTo.setEnabled(true);
+            buttonMapTo.setVisibility(View.VISIBLE);;
             buttonWebTo.setText("Web - " + toAirport.getName_eng());
-            buttonWebTo.setEnabled(true);
+            buttonWebTo.setVisibility(View.VISIBLE);
         }
     }
 
